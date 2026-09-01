@@ -38,5 +38,5 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # Testing framework used to cover both pagination strategies
-  gem "rspec-rails", "~> 7.1"
+  gem "rspec-rails", "~> 8.0"
 end
