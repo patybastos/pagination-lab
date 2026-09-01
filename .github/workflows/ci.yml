@@ -22,7 +22,7 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
 
-  scan_js:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,8 +35,15 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
+      - name: Set up database
+        env:
+          RAILS_ENV: test
+        run: bin/rails db:schema:load
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: bundle exec rspec
 
   lint:
     runs-on: ubuntu-latest
